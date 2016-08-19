@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add Plan</title>
+</head>
+<body>
+	<p><a href='{%url 'dashboard' %}'>Home</a></p>
+	<p><a href='{%url 'logout' %}'>Logout</a></p>
+	<h1>Add a Trip</h1>
+	{% if messages %}
+		{% for message in messages%}
+			<p>{{message}}</p>
+		{% endfor %}
+	{% endif %}
+	<form action='{% url 'create' %}' method='post'>
+	{% csrf_token %}
+		<p>Destination: <input type='text' name='destination'></p>
+		<p>Description: <input type='text' name='description'>
+		<p>Travel Date From: <input type='text' name='travel_date_from' placeholder='Mmm Date Year'></p>
+		<p>Travel Date To: <input type='text' name='travel_date_to' placeholder='Mmm Date Year'></p>
+		<input type='submit' value='add'>
+	</form>
+</body>
+</html>

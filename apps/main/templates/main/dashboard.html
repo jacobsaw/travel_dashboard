@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Travel Dashboard</title>
+</head>
+<body>
+	<h1>Welcome, {{user.name}}!</h1>
+	<p><a href='{%url 'logout' %}'>Logout</a></p>
+	<h3>Your Trip Schedule</h3>
+	<table>
+		<tr>
+			<th>Destination</th>
+			<th>Travel Date Start</th>
+			<th>Travel Date End</th>
+			<th>Plan</th>
+		</tr>
+		{% for trip in trips %}
+			{% if trip.user.id == user.id %}
+		<tr>
+			<td><a href='{% url 'destination' id=trip.id %}'>{{trip.destination}}</a></td>
+			<td>{{trip.travel_date_from}}</td>
+			<td>{{trip.travel_date_to}}</td>
+			<td>{{trip.description}}</td>
+		</tr>
+			{% endif %}
+		{% endfor %}
+	</table>
+	<h3>Yo peeps travel plans</h3>
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Destination</th>
+			<th>Travel Date Start</th>
+			<th>Travel Date End</th>
+			<th>Do You Want to Join?</th>
+		</tr>
+		{% for trip in trips %}
+		<tr>
+			<td>{{trip.user.name}}</td>
+			<td><a href='{% url 'destination' id=trip.id %}'>{{trip.destination}}</a></td>
+			<td>{{trip.travel_date_from}}</td>
+			<td>{{trip.travel_date_to}}</td>
+			<td><a href='{% url 'join' id=trip.id%}'>Join</a></td>
+		</tr>
+		{% endfor %}
+	</table>
+	<p><a href='{%url 'add'%}'>Add Travel Plan</a></p>
+</body>
+</html>
